@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Management System</title>
   <style>
     body {
@@ -13,7 +15,7 @@
 
     nav {
       background-color: #333;
-      padding: 10px 0;
+      padding: 10px;
     }
 
     nav a {
@@ -51,20 +53,27 @@
       padding: 5px 10px;
     }
 
-    .student-list {
+    table {
+      width: 100%;
       margin-top: 20px;
+      border-collapse: collapse;
     }
 
-    .student-list p {
-      font-weight: bold;
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #eee;
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
+    <a href="#">Home</a>
+    <a href="#">About</a>
   </nav>
 
   <div class="container">
@@ -72,22 +81,44 @@
     <p>This page allows you to view and add student records including name, age, and grade.</p>
 
     <h2>Student List</h2>
-    <div class="student-list">
-      <p>Name &nbsp;&nbsp;&nbsp;&nbsp; Age &nbsp;&nbsp;&nbsp;&nbsp; Grade</p>
-      <!-- Student list goes here -->
-    </div>
+    <table id="studentTable">
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Grade</th>
+      </tr>
+      <!-- Students will be added here -->
+    </table>
 
     <h2>Add Student</h2>
-    <form>
+    <form id="studentForm">
       <label>Name:</label>
-      <input type="text" name="name"><br>
+      <input type="text" id="name" required><br>
       <label>Age:</label>
-      <input type="text" name="age"><br>
+      <input type="number" id="age" required><br>
       <label>Grade:</label>
-      <input type="text" name="grade"><br>
+      <input type="text" id="grade" required><br>
       <button type="submit">Add Student</button>
     </form>
   </div>
+
+  <script>
+    const form = document.getElementById('studentForm');
+    const table = document.getElementById('studentTable');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Stop form from reloading page
+
+      const name = document.getElementById('name').value;
+      const age = document.getElementById('age').value;
+      const grade = document.getElementById('grade').value;
+
+      const row = table.insertRow();
+      row.innerHTML = `<td>${name}</td><td>${age}</td><td>${grade}</td>`;
+
+      form.reset();
+    });
+  </script>
 
 </body>
 </html>
